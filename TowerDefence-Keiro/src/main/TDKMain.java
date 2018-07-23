@@ -1,14 +1,14 @@
 package main;
 
-import game.Game;
+import engine.core.CoreEngine;
 
 public class TDKMain 
 {
 	public static void main(String arg[])
 	{	
-		Game game = new Game();
+		CoreEngine core = new CoreEngine();
 		
-		game.start();
+		core.start();
 		
 	}
 
