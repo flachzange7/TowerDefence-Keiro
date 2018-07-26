@@ -3,12 +3,22 @@ package game;
 import org.lwjgl.input.Keyboard;
 
 import engine.core.Input;
+import engine.core.Vertex;
+import engine.rendering.Mesh;
+import engine.core.Vector3f;
 
 public class Game 
 {
+	private Mesh m_mesh;
+	
 	public Game()
 	{
+		m_mesh = new Mesh();
+		Vertex[] data = new Vertex[] {new Vertex(new Vector3f(-1, -1, 0)),
+									  new Vertex(new Vector3f(0, 1, 0)),
+									  new Vertex(new Vector3f(1, -1, 0))};
 		
+		m_mesh.addVertices(data);
 	}
 	
 	public void input()
@@ -16,7 +26,7 @@ public class Game
 		if(Input.keyDown(Keyboard.KEY_UP))
 			System.out.println("Key up pressed");
 		
-		if(Input.keyUp(Keyboard.KEY_UP))
+		if(Input.keyReleased(Keyboard.KEY_UP))
 			System.out.println("Key up released");
 		
 		if(Input.mouseButtonPressed(1))
@@ -33,6 +43,6 @@ public class Game
 	
 	public void render()
 	{
-		
+		m_mesh.draw();
 	}
 }

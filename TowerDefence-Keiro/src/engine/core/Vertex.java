@@ -1,46 +1,26 @@
 package engine.core;
 
-public class Vertex {
+public class Vertex 
+{
+	public static final int SIZE = 3;
 	
-	private float m_x;
-	private float m_y;
-	private float m_z;
+	private Vector3f m_pos;
 	
-	public Vertex(float x, float y, float z)
+	public Vertex(Vector3f pos)
 	{
-		m_x = x;
-		m_y = y;
-		m_z = z;
+		setPosition(pos);
+	}
+
+	public Vector3f position() 
+	{
+		return m_pos;
+	}
+
+	public void setPosition(Vector3f pos) 
+	{
+		m_pos = pos;
 	}
 	
-	public float x()
-	{
-		return m_x;
-	}
-	
-	public float y()
-	{
-		return m_y;
-	}
-	
-	public float z()
-	{
-		return m_z;
-	}
-	
-	public void setX(float x)
-	{
-		m_x = x;
-	}
-	
-	public void setY(float y)
-	{
-		m_y = y;
-	}
-	
-	public void setZ(float z)
-	{
-		m_z = z;
-	}
+
 
 }
