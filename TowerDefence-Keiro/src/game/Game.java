@@ -18,7 +18,7 @@ public class Game
 	{
 		m_program = new ShaderProgram();
 		
-		m_mesh = new Mesh();
+		m_mesh = new Mesh(m_program);
 		Vertex[] data = new Vertex[] {new Vertex(new Vector3f(-1, -1, 0)),
 									  new Vertex(new Vector3f(0, 1, 0)),
 									  new Vertex(new Vector3f(1, -1, 0))};
@@ -28,6 +28,9 @@ public class Game
 		m_program.addShader("vertexShader.vs", ShaderType.VERTEX);
 		m_program.addShader("fragmentShader.frag", ShaderType.FRAGMENT);
 		m_program.link();
+		
+		m_program.registerUniform("size");
+		m_program.setUniformValue("size", 0.25f);
 		
 	}
 	
