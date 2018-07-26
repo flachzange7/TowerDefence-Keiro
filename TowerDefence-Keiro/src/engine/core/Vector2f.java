@@ -31,58 +31,67 @@ public class Vector2f
 		return this;
 	}
 	
-	public Vector2f rotate(int angle)
+	public Vector2f rotate(float angle)
 	{
-		// TODO: implement me!
+		m_x = (float) (m_x * Math.cos(Math.toRadians(angle)) - m_y * Math.sin(angle));
+		m_y = (float) (m_x * Math.cos(Math.toRadians(angle)) + m_y * Math.sin(angle));
 		return null;
 	}
 	
 	public Vector2f add(Vector2f r)
 	{
-		// TODO: implement me!
-		return null;
+		m_x = m_x + r.m_x;
+		m_y = m_y + r.m_y;
+		return this;
 	}
 	
 	public Vector2f add(float r)
 	{
-		// TODO: implement me!
-		return null;
+		m_x = m_x + r;
+		m_y = m_y + r;
+		return this;
 	}
 	
 	public Vector2f sub(Vector2f r)
 	{
-		// TODO: implement me!
-		return null;
+		m_x = m_x - r.m_x;
+		m_y = m_y - r.m_y;
+		return this;
 	}
 	
 	public Vector2f sub(float r)
 	{
-		// TODO: implement me!
-		return null;
+		m_x = m_x - r;
+		m_y = m_y - r;
+		return this;
 	}
 	
 	public Vector2f mul(Vector2f r)
 	{
-		// TODO: implement me!
-		return null;
+		m_x = m_x * r.m_x;
+		m_y = m_y * r.m_y;
+		return this;
 	}
 	
 	public Vector2f mul(float r)
 	{
-		// TODO: implement me!
-		return null;
+		m_x = m_x * r;
+		m_y = m_y * r;
+		return this;
 	}
 	
 	public Vector2f div(Vector2f r)
 	{
-		// TODO: implement me!
-		return null;
+		m_x = m_x / r.m_x;
+		m_y = m_y / r.m_y;
+		return this;
 	}
 	
 	public Vector2f div(float r)
 	{
-		// TODO: implement me!
-		return null;
+		m_x = m_x / r;
+		m_y = m_y / r;
+		return this;
 	}
 
 	public String toString()
@@ -108,28 +117,5 @@ public class Vector2f
 	public void setX(float x)
 	{
 		m_x = x;
-	}
-	
-	public float length()
-	{
-		float length = 0;
-		length = (float) Math.abs(Math.sqrt(m_x * m_x + m_y * m_y));
-		return length;
-	}
-	
-	public void dotProduct(float num)
-	{
-		float dotProductX = 0;
-		float dotProductY = 0;
-		dotProductX = m_x * num;
-		dotProductY = m_y * num;
-	}
-	
-	public void normalize(float length)
-	{
-		float normalizedX = 0;
-		float normalizedY = 0;
-		normalizedX = m_x / length;
-		normalizedY = m_y / length;
 	}
 }
