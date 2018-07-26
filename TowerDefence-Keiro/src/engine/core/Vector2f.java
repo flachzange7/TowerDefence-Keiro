@@ -36,5 +36,26 @@ public class Vector2f
 		m_x = x;
 	}
 	
+	public float length()
+	{
+		float length = 0;
+		length = (float) Math.abs(Math.sqrt(m_x * m_x + m_y * m_y));
+		return length;
+	}
 	
+	public void dotProduct(float num)
+	{
+		float dotProductX = 0;
+		float dotProductY = 0;
+		dotProductX = m_x * num;
+		dotProductY = m_y * num;
+	}
+	
+	public void normalize(float length)
+	{
+		float normalizedX = 0;
+		float normalizedY = 0;
+		normalizedX = m_x / length;
+		normalizedY = m_y / length;
+	}
 }
