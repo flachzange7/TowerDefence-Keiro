@@ -5,20 +5,33 @@ import org.lwjgl.input.Keyboard;
 import engine.core.Input;
 import engine.core.Vertex;
 import engine.rendering.Mesh;
+import engine.rendering.ShaderProgram;
+import engine.rendering.Shader.ShaderType;
 import engine.core.Vector3f;
 
 public class Game 
 {
 	private Mesh m_mesh;
+	ShaderProgram m_program;
 	
 	public Game()
 	{
-		m_mesh = new Mesh();
+		m_program = new ShaderProgram();
+		
+		m_mesh = new Mesh(m_program);
 		Vertex[] data = new Vertex[] {new Vertex(new Vector3f(-1, -1, 0)),
 									  new Vertex(new Vector3f(0, 1, 0)),
 									  new Vertex(new Vector3f(1, -1, 0))};
 		
 		m_mesh.addVertices(data);
+		
+		m_program.addShader("vertexShader.vs", ShaderType.VERTEX);
+		m_program.addShader("fragmentShader.frag", ShaderType.FRAGMENT);
+		m_program.link();
+		
+		m_program.registerUniform("size");
+		m_program.setUniformValue("size", 0.25f);
+		
 	}
 	
 	public void input()
@@ -43,6 +56,8 @@ public class Game
 	
 	public void render()
 	{
+		m_program.bind();
+		
 		m_mesh.draw();
 	}
 }
