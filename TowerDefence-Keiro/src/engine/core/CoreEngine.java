@@ -4,13 +4,14 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import engine.core.Time;
-import engine.gui.Window;
-
+import engine.rendering.RenderEngine;
+import engine.rendering.Window;
 import game.Game;
 
 public class CoreEngine 
 {
 	private Window m_window;
+	private RenderEngine m_renderEngine;
 	private boolean m_isRunning;
 	private final double MAX_FPS = 5000.0;
 	
@@ -18,7 +19,8 @@ public class CoreEngine
 	
 	public CoreEngine()
 	{
-		m_window = new Window("TowerDefence - Keiro", 800, 600);		
+		m_window = new Window("TowerDefence - Keiro", 800, 600);
+		m_renderEngine = new RenderEngine();
 		m_game = new Game();
 	}
 	
@@ -106,6 +108,8 @@ public class CoreEngine
 	
 	public void render()
 	{
+		m_renderEngine.clearScreen();
+		
 		m_game.render();
 		m_window.render();
 	}

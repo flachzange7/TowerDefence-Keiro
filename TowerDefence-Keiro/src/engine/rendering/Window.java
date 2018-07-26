@@ -1,4 +1,4 @@
-package engine.gui;
+package engine.rendering;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
