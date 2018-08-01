@@ -9,6 +9,15 @@ import engine.rendering.ShaderProgram;
 import engine.rendering.Shader.ShaderType;
 import engine.core.Vector3f;
 
+
+// TODO: Maxi implement
+/*
+ * Game = abstract class; have to be inherrit game Game itself 
+ * Game build as a tree; GameObject are Elements
+ * input, update, render, children, root -> Methods
+ * 
+ * 
+ */
 public class Game 
 {
 	private Mesh m_mesh;
