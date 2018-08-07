@@ -2,6 +2,8 @@ package engine.core;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import static org.lwjgl.opengl.GL11.*;
+
 
 import engine.core.Time;
 import engine.rendering.RenderEngine;
@@ -22,6 +24,13 @@ public class CoreEngine
 		m_window = new Window("TowerDefence - Keiro", 800, 600);
 		m_renderEngine = new RenderEngine();
 		m_game = new Game();
+	}
+	
+	public void printGraphicsInformation()
+	{
+		System.out.println(glGetString(GL_VERSION));
+		System.out.println(glGetString(GL_VENDOR));
+		System.out.println(glGetString(GL_RENDERER));
 	}
 	
 	public void start()

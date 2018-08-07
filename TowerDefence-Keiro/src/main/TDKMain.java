@@ -7,6 +7,7 @@ public class TDKMain
 	public static void main(String arg[])
 	{	
 		CoreEngine core = new CoreEngine();
+		core.printGraphicsInformation();
 		
 		core.start();
 		

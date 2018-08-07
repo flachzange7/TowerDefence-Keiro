@@ -3,6 +3,8 @@ package game;
 import org.lwjgl.input.Keyboard;
 
 import engine.core.Input;
+import engine.core.Time;
+import engine.core.Transform;
 import engine.core.Vertex;
 import engine.rendering.Mesh;
 import engine.rendering.ShaderProgram;
@@ -21,7 +23,8 @@ import engine.core.Vector3f;
 public class Game 
 {
 	private Mesh m_mesh;
-	ShaderProgram m_program;
+	private ShaderProgram m_program;
+	private Transform m_transform;
 	
 	public Game()
 	{
@@ -30,17 +33,24 @@ public class Game
 		m_mesh = new Mesh(m_program);
 		Vertex[] data = new Vertex[] {new Vertex(new Vector3f(-1, -1, 0)),
 									  new Vertex(new Vector3f(0, 1, 0)),
-									  new Vertex(new Vector3f(1, -1, 0))};
+									  new Vertex(new Vector3f(1, -1, 0)),
+									  new Vertex(new Vector3f(0, -1, 1))};
 		
-		m_mesh.addVertices(data);
+		int[] indices = new int[] {0, 1, 3,
+								   3, 1, 2,
+								   2, 1, 0,
+								   0, 2, 3}; 
+		
+		
+		m_mesh.addVertices(data, indices);
+		
+		m_transform = new Transform();
 		
 		m_program.addShader("vertexShader.vs", ShaderType.VERTEX);
 		m_program.addShader("fragmentShader.frag", ShaderType.FRAGMENT);
 		m_program.link();
 		
-		m_program.registerUniform("size");
-		m_program.setUniformValue("size", 0.25f);
-		
+		m_program.registerUniform("transform");
 	}
 	
 	public void input()
@@ -58,14 +68,24 @@ public class Game
 			System.out.println("MouseButton 1 released");
 	}
 	
+	float temp = 0.0f;
+	
 	public void update()
 	{
+		temp += Time.delta();
 		
+		float sinTemp = (float)Math.sin(temp);
+		
+		m_transform.setTranslation(sinTemp, 0, 0);
+		m_transform.setRotation(0, 0, sinTemp * 180);
+		m_transform.setScaling(sinTemp, sinTemp, sinTemp);
 	}
 	
 	public void render()
 	{
 		m_program.bind();
+		
+		m_program.setUniformValue("transform", m_transform.transformation());
 		
 		m_mesh.draw();
 	}

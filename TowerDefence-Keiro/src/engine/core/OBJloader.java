@@ -6,9 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Objloader 
+public class OBJloader 
 {
-	public Objloader(Object o, String path) throws IOException
+	public OBJloader(Object o, String path) throws IOException
 	{
 		BufferedReader read = new BufferedReader(new FileReader(new File(path)));
 		String line;
@@ -20,7 +20,7 @@ public class Objloader
 				float y = Float.valueOf(line.split(" ")[2]);
 				float z = Float.valueOf(line.split(" ")[3]);
 				Vector3f v = new Vector3f(x, y, z);
-				o.verts.add(v);
+				//o.verts.add(v);
 			}
 			if(line.startsWith("vn "))
 			{
@@ -28,7 +28,7 @@ public class Objloader
 				float y = Float.valueOf(line.split(" ")[2]);
 				float z = Float.valueOf(line.split(" ")[3]);
 				Vector3f v = new Vector3f(x, y, z);
-				o.norms.add(v);
+				//o.norms.add(v);
 			}
 			if(line.startsWith("f "))
 			{
