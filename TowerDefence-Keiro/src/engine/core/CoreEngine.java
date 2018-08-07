@@ -21,7 +21,7 @@ public class CoreEngine
 	{
 		m_window = new Window("TowerDefence - Keiro", 800, 600);
 		m_renderEngine = new RenderEngine();
-		m_game = new Game();
+		//m_game = new Game();
 	}
 	
 	public void start()

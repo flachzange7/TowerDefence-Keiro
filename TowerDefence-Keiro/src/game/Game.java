@@ -2,9 +2,11 @@ package game;
 
 import org.lwjgl.input.Keyboard;
 
+import engine.core.CoreEngine;
 import engine.core.Input;
 import engine.core.Vertex;
 import engine.rendering.Mesh;
+import engine.rendering.RenderEngine;
 import engine.rendering.ShaderProgram;
 import engine.rendering.Shader.ShaderType;
 import engine.core.Vector3f;
@@ -18,8 +20,9 @@ import engine.core.Vector3f;
  * 
  * 
  */
-public class Game 
+public abstract class Game
 {
+	private GameObject m_root;
 	private Mesh m_mesh;
 	ShaderProgram m_program;
 	
@@ -41,7 +44,10 @@ public class Game
 		m_program.registerUniform("size");
 		m_program.setUniformValue("size", 0.25f);
 		
+		
 	}
+	
+	public void init() {}
 	
 	public void input()
 	{
@@ -60,7 +66,7 @@ public class Game
 	
 	public void update()
 	{
-		
+		getRootObject().updateAll();
 	}
 	
 	public void render()
@@ -68,5 +74,23 @@ public class Game
 		m_program.bind();
 		
 		m_mesh.draw();
+	}
+	
+	public void addObject(GameObject object)
+	{
+		getRootObject().addChild(object);
+	}
+	
+	private GameObject getRootObject()
+	{
+		if(m_root == null)
+			m_root = new GameObject();
+		
+		return m_root;
+	}
+	
+	public void setEngine(CoreEngine engine)
+	{
+		getRootObject().setEngine(engine);
 	}
 }
