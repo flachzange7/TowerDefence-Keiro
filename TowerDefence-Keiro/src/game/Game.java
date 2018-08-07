@@ -2,6 +2,7 @@ package game;
 
 import org.lwjgl.input.Keyboard;
 
+import engine.core.Camera;
 import engine.core.Input;
 import engine.core.Time;
 import engine.core.Transform;
@@ -26,17 +27,20 @@ public class Game
 	private ShaderProgram m_program;
 	private Transform m_transform;
 	
+	private Camera m_camera;
+	
 	public Game()
 	{
 		m_program = new ShaderProgram();
+		m_camera = new Camera();
 		
 		m_mesh = new Mesh(m_program);
 
 		m_mesh.loadOBJModel("res/models/box.obj");
-		//m_mesh.testLoading();
 		
 		m_transform = new Transform();
-		m_transform.setProjection(70f, 800, 600, 0.1f, 1000f);
+		Transform.setCamera(m_camera);
+		Transform.setProjection(70f, 800, 600, 0.1f, 1000f);
 		
 		m_program.addShader("vertexShader.vs", ShaderType.VERTEX);
 		m_program.addShader("fragmentShader.frag", ShaderType.FRAGMENT);
@@ -47,17 +51,7 @@ public class Game
 	
 	public void input()
 	{
-		if(Input.keyDown(Keyboard.KEY_UP))
-			System.out.println("Key up pressed");
-		
-		if(Input.keyReleased(Keyboard.KEY_UP))
-			System.out.println("Key up released");
-		
-		if(Input.mouseButtonPressed(1))
-			System.out.println("MouseButton 1 pressed " + Input.mousePosition());
-		
-		if(Input.mouseButtonReleased(1))
-			System.out.println("MouseButton 1 released");
+		m_camera.input();
 	}
 	
 	float temp = 0.0f;

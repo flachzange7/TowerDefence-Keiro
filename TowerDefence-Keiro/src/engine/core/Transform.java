@@ -2,6 +2,8 @@ package engine.core;
 
 public class Transform 
 {
+	private static Camera m_camera;
+	
 	private static float m_zNear;
 	private static float m_zFar;
 	private static float m_width;
@@ -31,9 +33,15 @@ public class Transform
 	public Matrix4f projectedTransformation()
 	{
 		Matrix4f transformationMatrix = transformation();
-		Matrix4f projectionMatrix = new Matrix4f().initAsPerspective(m_fov, m_height/m_width, m_zNear, m_zFar);
+		Matrix4f projectionMatrix = new Matrix4f().initAsPerspective(m_fov, m_width/m_height, m_zNear, m_zFar);
+		Matrix4f cameraRotation = new Matrix4f().initAsCamera(m_camera.forward(), m_camera.up());
+		Matrix4f cameraTranslation = new Matrix4f().initAsTranslation(-m_camera.position().x(), -m_camera.position().y(), -m_camera.position().z());
 		
-		return projectionMatrix.mul(transformationMatrix);
+		Matrix4f test = projectionMatrix.mul(cameraRotation.mul(cameraTranslation.mul(transformationMatrix)));
+		Matrix4f test1 = projectionMatrix.mul(cameraTranslation.mul(transformationMatrix));
+		Matrix4f test2 = projectionMatrix.mul(transformationMatrix);
+		
+		return projectionMatrix.mul(cameraRotation.mul(cameraTranslation.mul(transformationMatrix)));
 	}
 	
 	public static void setProjection(float fov, float width, float height, float zNear, float zFar)
@@ -88,5 +96,15 @@ public class Transform
 	public void setScaling(float x, float y, float z) 
 	{
 		m_scaling = new Vector3f(x, y, z);
+	}
+
+	public static Camera camera() 
+	{
+		return m_camera;
+	}
+
+	public static void setCamera(Camera camera) 
+	{
+		m_camera = camera;
 	}
 }
