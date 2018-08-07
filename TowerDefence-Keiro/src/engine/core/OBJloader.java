@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class OBJloader 
-{
+{	
 	public OBJloader(Object o, String path) throws IOException
 	{
 		BufferedReader read = new BufferedReader(new FileReader(new File(path)));

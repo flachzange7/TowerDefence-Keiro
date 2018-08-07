@@ -31,20 +31,12 @@ public class Game
 		m_program = new ShaderProgram();
 		
 		m_mesh = new Mesh(m_program);
-		Vertex[] data = new Vertex[] {new Vertex(new Vector3f(-1, -1, 0)),
-									  new Vertex(new Vector3f(0, 1, 0)),
-									  new Vertex(new Vector3f(1, -1, 0)),
-									  new Vertex(new Vector3f(0, -1, 1))};
-		
-		int[] indices = new int[] {0, 1, 3,
-								   3, 1, 2,
-								   2, 1, 0,
-								   0, 2, 3}; 
-		
-		
-		m_mesh.addVertices(data, indices);
+
+		m_mesh.loadOBJModel("res/models/box.obj");
+		//m_mesh.testLoading();
 		
 		m_transform = new Transform();
+		m_transform.setProjection(70f, 800, 600, 0.1f, 1000f);
 		
 		m_program.addShader("vertexShader.vs", ShaderType.VERTEX);
 		m_program.addShader("fragmentShader.frag", ShaderType.FRAGMENT);
@@ -76,16 +68,16 @@ public class Game
 		
 		float sinTemp = (float)Math.sin(temp);
 		
-		m_transform.setTranslation(sinTemp, 0, 0);
-		m_transform.setRotation(0, 0, sinTemp * 180);
-		m_transform.setScaling(sinTemp, sinTemp, sinTemp);
+		m_transform.setTranslation(sinTemp, 0, 5);
+		m_transform.setRotation(0, sinTemp * 180, 0);
+		//m_transform.setScaling(sinTemp, sinTemp, sinTemp);
 	}
 	
 	public void render()
 	{
 		m_program.bind();
 		
-		m_program.setUniformValue("transform", m_transform.transformation());
+		m_program.setUniformValue("transform", m_transform.projectedTransformation());
 		
 		m_mesh.draw();
 	}

@@ -13,16 +13,106 @@ public class Vector3f
 		m_z = z;
 	}
 	
+	public float length()
+	{
+		float length;
+		length = (float) Math.sqrt(m_x * m_x + m_y * m_y + m_z * m_z);
+		return length;
+	}
+	
+	public Vector3f dot(Vector3f r)
+	{
+		m_x = m_x * r.m_x;
+		m_y = m_y * r.m_y;
+		m_z = m_z * r.m_z;
+		return this;
+	}
+	
 	public Vector3f normalize()
 	{
-		//TODO: implement me
-		return null;
+		float length = length();
+		m_x = m_x /= length;
+		m_y = m_y /= length;
+		m_z = m_z /= length;
+		return this;
 	}
 	
 	public Vector3f cross(Vector3f r)
 	{
-		//TODO: implement me
-		return null;
+		m_x = m_y * r.m_z - m_z * r.m_y;
+		m_y = m_z * r.m_x - m_x * r.m_z;
+		m_z = m_x * r.m_y - m_y * r.m_x;
+		return this;
+	}
+	
+	public Vector3f rotate(float angle)
+	{
+		
+		return this;
+	}
+	
+	public Vector3f add(Vector3f r)
+	{
+		m_x = m_x + r.m_x;
+		m_y = m_y + r.m_y;
+		m_z = m_z + r.m_z;
+		return this;
+	}
+	
+	public Vector3f add(float r)
+	{
+		m_x = m_x + r;
+		m_y = m_y + r;
+		m_z = m_z + r;
+		return this;
+	}
+	
+	public Vector3f sub(Vector3f r)
+	{
+		m_x = m_x - r.m_x;
+		m_y = m_y - r.m_y;
+		m_z = m_z - r.m_z;
+		return this;
+	}
+	
+	public Vector3f sub(float r)
+	{
+		m_x = m_x - r;
+		m_y = m_y - r;
+		m_z = m_z - r;
+		return this;
+	}
+	
+	public Vector3f mul(Vector3f r)
+	{
+		m_x = m_x * r.m_x;
+		m_y = m_y * r.m_y;
+		m_z = m_z * r.m_z;
+		return this;
+	}
+	
+	public Vector3f mul(float r)
+	{
+		m_x = m_x * r;
+		m_y = m_y * r;
+		m_z = m_z * r;
+		return this;
+	}
+	
+	public Vector3f div(Vector3f r)
+	{
+		m_x = m_x / r.m_x;
+		m_y = m_y / r.m_y;
+		m_z = m_z / r.m_z;
+		return this;
+	}
+	
+	public Vector3f div(float r)
+	{
+		m_x = m_x / r;
+		m_y = m_y / r;
+		m_z = m_z / r;
+		return this;
 	}
 
 	public float x() 

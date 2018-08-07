@@ -2,6 +2,12 @@ package engine.core;
 
 public class Transform 
 {
+	private static float m_zNear;
+	private static float m_zFar;
+	private static float m_width;
+	private static float m_height;
+	private static float m_fov;
+	
 	private Vector3f m_translation;
 	private Vector3f m_rotation;
 	private Vector3f m_scaling;
@@ -20,6 +26,23 @@ public class Transform
 		Matrix4f scaleMatrix = new Matrix4f().initAsScale(m_scaling.x(), m_scaling.y(), m_scaling.z());
 
 		return tranformationMatrix.mul(roationMatrix.mul(scaleMatrix));
+	}
+	
+	public Matrix4f projectedTransformation()
+	{
+		Matrix4f transformationMatrix = transformation();
+		Matrix4f projectionMatrix = new Matrix4f().initAsPerspective(m_fov, m_height/m_width, m_zNear, m_zFar);
+		
+		return projectionMatrix.mul(transformationMatrix);
+	}
+	
+	public static void setProjection(float fov, float width, float height, float zNear, float zFar)
+	{
+		Transform.m_fov = fov;
+		Transform.m_width = width;
+		Transform.m_height = height;
+		Transform.m_zFar = zFar;
+		Transform.m_zNear = zNear;
 	}
 
 	public Vector3f translation() 

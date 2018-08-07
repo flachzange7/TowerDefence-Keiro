@@ -31,6 +31,13 @@ public class Vector2f
 		return this;
 	}
 	
+	public float cross(Vector2f r)
+	{
+		float cross;
+		cross = m_x * r.m_y - m_y * r.m_x;
+		return cross;
+	}
+	
 	public Vector2f rotate(float angle)
 	{
 		m_x = (float) (m_x * Math.cos(Math.toRadians(angle)) - m_y * Math.sin(angle));
