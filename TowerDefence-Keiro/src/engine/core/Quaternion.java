@@ -9,7 +9,7 @@ public class Quaternion
 	
 	public Quaternion(float x, float y, float z, float w)
 	{
-		setX(x);
+		m_x = x;
 		m_y = y;
 		m_z = z;
 		m_w = w;

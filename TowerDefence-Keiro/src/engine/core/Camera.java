@@ -30,26 +30,28 @@ public class Camera
 	
 	public void rotateX(float angle)
 	{
+		// TODO: fix me
 		Vector3f Haxis = yAxis.cross(m_forward);
-		Haxis.normalize();
+		//Haxis.normalize();
 		
-		m_forward.rotate(Haxis, angle);
-		m_forward.normalize();
+		m_forward = m_forward.rotate(Haxis, angle);
+		//m_forward.normalize();
 		
 		m_up = m_forward.cross(Haxis);
-		m_up.normalize();
+		//m_up.normalize();
 	}
 	
 	public void rotateY(float angle)
 	{
-		Vector3f Haxis = yAxis.cross(m_forward);
-		Haxis.normalize();
+		// TODO: fix me
+		Vector3f Haxis = yAxis.cross(m_forward).normalize();
+		//Haxis.normalize();
 		
-		m_forward.rotate(yAxis, angle);
-		m_forward.normalize();
+		m_forward.rotate(yAxis, angle).normalize();
+		//m_forward.normalize();
 		
-		m_up = m_forward.cross(Haxis);
-		m_up.normalize();
+		m_up = m_forward.cross(Haxis).normalize();
+		//m_up.normalize();
 	}
 	
 	public void input()
@@ -65,6 +67,15 @@ public class Camera
 			move(left(), moveAmount);
 		if(Input.keyDown(Input.KEY_D))
 			move(right(), moveAmount);
+		
+		if(Input.keyDown(Input.KEY_UP))
+			rotateX(rotationAmount);
+		if(Input.keyDown(Input.KEY_DOWN))
+			rotateX(-rotationAmount);
+		if(Input.keyDown(Input.KEY_LEFT))
+			rotateY(rotationAmount);
+		if(Input.keyDown(Input.KEY_RIGHT))
+			rotateY(-rotationAmount);
 	}
 	
 	public Vector3f left()

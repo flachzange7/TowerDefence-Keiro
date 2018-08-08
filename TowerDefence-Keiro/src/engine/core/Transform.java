@@ -33,13 +33,9 @@ public class Transform
 	public Matrix4f projectedTransformation()
 	{
 		Matrix4f transformationMatrix = transformation();
-		Matrix4f projectionMatrix = new Matrix4f().initAsPerspective(m_fov, m_width/m_height, m_zNear, m_zFar);
+		Matrix4f projectionMatrix = new Matrix4f().initAsPerspective(m_fov, m_width/m_height, m_zNear, m_zFar);	
 		Matrix4f cameraRotation = new Matrix4f().initAsCamera(m_camera.forward(), m_camera.up());
 		Matrix4f cameraTranslation = new Matrix4f().initAsTranslation(-m_camera.position().x(), -m_camera.position().y(), -m_camera.position().z());
-		
-		Matrix4f test = projectionMatrix.mul(cameraRotation.mul(cameraTranslation.mul(transformationMatrix)));
-		Matrix4f test1 = projectionMatrix.mul(cameraTranslation.mul(transformationMatrix));
-		Matrix4f test2 = projectionMatrix.mul(transformationMatrix);
 		
 		return projectionMatrix.mul(cameraRotation.mul(cameraTranslation.mul(transformationMatrix)));
 	}
